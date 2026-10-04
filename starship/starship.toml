@@ -1,0 +1,35 @@
+format = """
+$hostname\
+$directory\
+$git_branch\
+$fill\
+$python\
+$golang\
+$rust\
+$nodejs\
+$cmd_duration\
+$line_break\
+$character
+"""
+
+[hostname]
+ssh_only = false
+style = "bold #FF55FF"
+
+[git_branch]
+style = "bold #ef9f76"
+
+[directory]
+style = "bold #55ffff"
+
+[python]
+symbol = "Python "
+
+[golang]
+symbol = "GO "
+
+[rust]
+symbol = "Rust "
+
+[nodejs]
+symbol = "Node "
