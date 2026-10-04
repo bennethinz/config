@@ -3,12 +3,17 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local act = wezterm.action
 
+
 opacity = 0.2
 config.window_close_confirmation = "NeverPrompt"
 config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
 config.font_size = 14.0
+
+-- Remove macOS title bar but keep the traffic light buttons. Also allow the window to be resized
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 
+-- So that I can do a backslash with left opt
+config.send_composed_key_when_left_alt_is_pressed = true
 -- So that opt + arrow keys work in tmux
 config.keys = {
   { key = 'LeftArrow',  mods = 'OPT', action = act.SendKey { key = 'b', mods = 'ALT' } },
