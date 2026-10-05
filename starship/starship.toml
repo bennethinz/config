@@ -3,12 +3,9 @@ $hostname\
 $directory\
 $git_branch\
 $fill\
-$python\
-$golang\
-$rust\
-$nodejs\
 $cmd_duration\
 $line_break\
+$python\
 $character
 """
 
@@ -24,6 +21,7 @@ style = "bold #55ffff"
 
 [python]
 symbol = "Python "
+format = '[(\($virtualenv\) )]($style)'
 
 [golang]
 symbol = "GO "
