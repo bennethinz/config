@@ -1,0 +1,57 @@
+# herdr config.toml — vim motions + workspace navigation
+# Save as: ~/.config/herdr/config.toml   (Windows: %APPDATA%\herdr\config.toml)
+
+onboarding = false
+
+[ui]  
+# Needed so that nvim doesn't feel sluggish. `vim.opt.mouse = ""` also needs to be set in the nvim config
+mouse_capture = false
+
+[keys]
+# ---------- workspace navigation (one workspace per project) ----------
+
+# Jump straight to workspace 1-9 from prefix mode
+# (prefix+1..9 stays bound to tabs, so workspaces take shift)
+switch_workspace = "prefix+shift+1..9"
+
+# Previous / next project, vim-'unimpaired' style: [ = back, ] = forward.
+# Prefix-free direct chords — one keystroke, no prefix needed.
+# ctrl+alt is the modifier family herdr's docs vet as safe across terminals.
+previous_workspace = ["ctrl+alt+[", "prefix+comma"]
+next_workspace = ["ctrl+alt+]", "prefix+period"]
+
+# Jump back to the last focused pane across workspaces and tabs
+# (mnemonic: vim's `` — jump back to previous position)
+last_pane = "prefix+backtick"
+
+# Open an existing git worktree checkout as a workspace
+# (pairs well with one-workspace-per-project; create worktrees via prefix+shift+g)
+open_worktree = "prefix+shift+o"
+
+# ---------- agent navigation ----------
+
+# Walk the agent panel (sidebar) without touching the mouse
+previous_agent = "prefix+alt+h"
+next_agent = "prefix+alt+l"
+
+# Focus an agent by index 1-9
+focus_agent = "prefix+alt+1..9"
+
+# ---------- tabs ----------
+
+# Reorder tabs (defaults only cover switching: prefix+p / prefix+n / prefix+1..9)
+move_tab_previous = "prefix+alt+comma"
+move_tab_next = "prefix+alt+period"
+
+# ---------- panes ----------
+
+# Clear screen + scrollback of the focused pane (keeps cursor line;
+# no-op on the alternate screen, so vim is never disturbed)
+clear_pane = "prefix+ctrl+k"
+
+# Direct one-keystroke pane resizing (no need to enter prefix+r resize mode)
+# Same chords herdr's docs use as their example for direct resizing
+resize_pane_left = "ctrl+shift+alt+left"
+resize_pane_down = "ctrl+shift+alt+down"
+resize_pane_up = "ctrl+shift+alt+up"
+resize_pane_right = "ctrl+shift+alt+right"
