@@ -3,11 +3,10 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local act = wezterm.action
 
-
-opacity = 0.2
 config.window_close_confirmation = "NeverPrompt"
 config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
 config.font_size = 14.0
+config.color_scheme = "Catppuccin Mocha"
 
 -- Remove macOS title bar but keep the traffic light buttons. Also allow the window to be resized
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
@@ -27,46 +26,57 @@ config.window_padding = {
   bottom = '1cell',
 }
 
-config.window_background_opacity = 0.2
-config.macos_window_background_blur = 40
-config.use_fancy_tab_bar = false
+-- config.window_background_opacity = 0.2
+-- config.macos_window_background_blur = 40
 
--- Transparent tab bar colors configuration
+-- Use the fancy tab bar, and give it the same background as the terminal
+-- (Catppuccin Mocha base color), so it blends in seamlessly
+config.use_fancy_tab_bar = true
+config.window_frame = {
+  font = wezterm.font("JetBrainsMono Nerd Font Mono"),
+  font_size = 12.0,
+  active_titlebar_bg = '#1e1e2e',
+  inactive_titlebar_bg = '#1e1e2e',
+}
+
 config.colors = {
-  foreground = 'rgba(255, 255, 255, 1)',
-  cursor_bg = '#BEF8E6',
-  cursor_border = '#BEF8E6',
   tab_bar = {
-    background = 'rgba(0, 0, 0, 0.2)',
-
     active_tab = {
-      bg_color = string.format('rgba(0, 0, 0, %s)', opacity),
-      fg_color = '#F38BA8',
-      underline = 'None',
-      intensity = 'Normal',
+      bg_color = '#1e1e2e',
+      fg_color = '#cdd6f4', -- Mocha text color
     },
-
     inactive_tab = {
-      bg_color = string.format('rgba(0, 0, 0, %s)', opacity),
-      fg_color = '#7f7f88',
+      bg_color = '#1e1e2e',
+      fg_color = '#6c7086', -- Mocha overlay0, dimmed
     },
-
     inactive_tab_hover = {
-      bg_color = string.format('rgba(0, 0, 0, %s)', opacity),
-      fg_color = '#ffffff',
+      bg_color = '#1e1e2e',
+      fg_color = '#cdd6f4',
       italic = false,
     },
     new_tab = {
-      bg_color = string.format('rgba(0, 0, 0, %s)', opacity),
-      fg_color = '#7f7f88',
+      bg_color = '#1e1e2e',
+      fg_color = '#6c7086',
     },
-
     new_tab_hover = {
-      bg_color = string.format('rgba(0, 0, 0, %s)', opacity),
-      fg_color = '#ffffff',
+      bg_color = '#1e1e2e',
+      fg_color = '#cdd6f4',
     },
   },
 }
 
+
+-- Add horizontal padding around tab titles
+wezterm.on('format-tab-title', function(tab, tabs, panes, conf, hover, max_width)
+  local title = tab.active_pane.title
+  local padding = '  '
+  -- Only truncate if the padded title would exceed the tab's max width
+  if #title + 4 > max_width then
+    title = wezterm.truncate_right(title, max_width - 4)
+  end
+  return padding .. title .. padding
+end)
+
+config.tab_max_width = 48 -- characters, default is 16
 
 return config
