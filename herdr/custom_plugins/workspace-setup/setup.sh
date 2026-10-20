@@ -13,7 +13,7 @@ new_tab() {
 first_pane=$("$HERDR" pane list --workspace "$ws" | jq -r '.result.panes[0].pane_id')  
 # "$HERDR" pane run "$first_pane" "my-command"  
   
-"$HERDR" pane run "$(new_tab ai)" "opencode"  
-"$HERDR" pane run "$(new_tab nvim)" "nvim"  
-"$HERDR" pane run "$(new_tab git)" "lazygit"  
+"$HERDR" pane run "$(new_tab ai)" "omp"
+"$HERDR" pane run "$(new_tab nvim)" "nvim"
+"$HERDR" pane run "$(new_tab git)" "lazygit"
   
